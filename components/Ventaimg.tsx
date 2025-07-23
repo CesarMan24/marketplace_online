@@ -9,10 +9,12 @@ interface Props {
   onUpload: (filePath: string) => void
 }
 
-export default function Avatar({ url, size = 150, onUpload }: Props) {
+export default function Ventaimg({ url, size = 150, onUpload }: Props) {
   const [uploading, setUploading] = useState(false)
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
-  const avatarSize = { height: size, width: size }
+  const [ventaUrl, setVentaUrl] = useState<string | null>(null)
+  const ventaSize = { height: size, width: size }
+
+  
 
   useEffect(() => {
     if (url) downloadImage(url)
@@ -20,7 +22,7 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
 
   async function downloadImage(path: string) {
     try {
-      const { data, error } = await supabase.storage.from('avatars').download(path)
+      const { data, error } = await supabase.storage.from('ventasimg').download(path)
 
       if (error) {
         throw error
@@ -29,16 +31,16 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
       const fr = new FileReader()
       fr.readAsDataURL(data)
       fr.onload = () => {
-        setAvatarUrl(fr.result as string)
+        setVentaUrl(fr.result as string)
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.log('Error downloading image: ', error.message)
+        console.log('Error descargar imagen: ', error.message)
       }
     }
   }
 
-  async function uploadAvatar() {
+  async function uploadVenta() {
     try {
       setUploading(true)
 
@@ -67,7 +69,7 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
       const fileExt = image.uri?.split('.').pop()?.toLowerCase() ?? 'jpeg'
       const path = `${Date.now()}.${fileExt}`
       const { data, error: uploadError } = await supabase.storage
-        .from('avatars')
+        .from('ventasimg')
         .upload(path, arraybuffer, {
           contentType: image.mimeType ?? 'image/jpeg',
         })
@@ -90,19 +92,19 @@ export default function Avatar({ url, size = 150, onUpload }: Props) {
 
   return (
     <View>
-      {avatarUrl ? (
+      {ventaUrl ? (
         <Image
-          source={{ uri: avatarUrl }}
+          source={{ uri: ventaUrl }}
           accessibilityLabel="Avatar"
-          style={[avatarSize, styles.avatar, styles.image]}
+          style={[ventaSize, styles.avatar, styles.image]}
         />
       ) : (
-        <View style={[avatarSize, styles.avatar, styles.noImage]} />
+        <View style={[ventaSize, styles.avatar, styles.noImage]} />
       )}
       <View>
         <Button
-          title={uploading ? 'Uploading ...' : 'Anade imagen perfil'}
-          onPress={uploadAvatar}
+          title={uploading ? 'Uploading ...' : 'Anade imagen del articulo'}
+          onPress={uploadVenta}
           disabled={uploading}
         />
       </View>
