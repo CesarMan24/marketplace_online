@@ -115,7 +115,7 @@ useFocusEffect(
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message)
-        Alert.alert("Registre su ubicacion")
+        Alert.alert("Verifique los datos de su cuenta (username, nombre, fotografia)")
       }
     } finally {
       setLoading(false)
@@ -326,12 +326,15 @@ useEffect(() => {
   let interval: NodeJS.Timeout | undefined;
   if (chatenvivo && selectedVenta) {
     // Llama una vez al abrir el chat 
-    handlemensajesporventa(selectedVenta.id_venta);
+    handlemensajesporventa( //@ts-ignore
+      selectedVenta.id_venta);
     // Luego cada 5 segundos
     interval = setInterval(() => {
       console.log("---------------------------------------------------------")
-      console.log(" en el interval de" +selectedVenta.articulo)
-      handlemensajesporventa(selectedVenta.id_venta);
+      console.log(" en el interval de" //@ts-ignore
+        +selectedVenta.articulo)
+      handlemensajesporventa( //@ts-ignore
+        selectedVenta.id_venta);
     }, 5000);
   }
   // Limpia el intervalo al cerrar el chat o cambiar de venta
@@ -351,7 +354,7 @@ const handlechatstyles = (usernameventa: string) => {
  return(
   <View style={{flex:1}}> 
   
-  {session ? ( 
+  {session  ? ( 
     <>
     <MapView provider={PROVIDER_GOOGLE} ref={mapRef} style={StyleSheet.absoluteFill}
       initialRegion={FOCUS}
@@ -626,7 +629,7 @@ const handlechatstyles = (usernameventa: string) => {
      
     </>
 ) : (
-        <Text style = {{fontSize: 50 ,textAlign : 'center', marginVertical: 200, marginHorizontal: 10}}> Inicia sesion para ver el mapa</Text>
+        <Text style = {{fontSize: 50 ,textAlign : 'center', marginVertical: 200, marginHorizontal: 10}}> Mapa no renderizado</Text>
        )}
  
   </View>
