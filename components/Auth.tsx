@@ -48,7 +48,7 @@ export default function Auth() {
       Alert.alert(error.message) 
       console.log(error)
     }
-    if (!session) Alert.alert('Cuenta aceptada y guardada, revisa tu correo')
+    if (!session) Alert.alert('Revisar correo', 'Si la cuenta ya ha sido registrada, no funcionara')
     setLoading(false)
   }
 

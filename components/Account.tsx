@@ -127,6 +127,7 @@ async function usuariosrepetidos() {
 
   return (
     <ScrollView>
+    
     <View style={styles.container}>
       {username ? <Text style = {{fontSize: 50}}> HOLA  🙋🏻, {firstname(full_name)}</Text>
       : <Text style = {{fontSize: 50}}> HOLA  🙋🏻</Text>}

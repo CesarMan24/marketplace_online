@@ -321,7 +321,7 @@ async function ConstantRefresh() {
   }, 5000);
 } */
 
-useEffect(() => {
+/*useEffect(() => {
  console.log ("en el useeffect")
   let interval: NodeJS.Timeout | undefined;
   if (chatenvivo && selectedVenta) {
@@ -341,7 +341,7 @@ useEffect(() => {
   return () => {
     if (interval) clearInterval(interval);
   };
-}, [chatenvivo, selectedVenta]);
+}, [chatenvivo, selectedVenta]); */
 
 const handlechatstyles = (usernameventa: string) => {
   if(usernameventa == username) {
@@ -351,10 +351,18 @@ const handlechatstyles = (usernameventa: string) => {
     return 'flex-start'
   }
 }
+const isanonimo = (usuario : string) => {
+  if (usuario == "Anonimo"){
+  console.log("usuario inexistente")
+ return false
+ }
+ else{ 
+  return true }
+}
  return(
   <View style={{flex:1}}> 
   
-  {session  ? ( 
+  {session && isanonimo(username)  ? ( 
     <>
     <MapView provider={PROVIDER_GOOGLE} ref={mapRef} style={StyleSheet.absoluteFill}
       initialRegion={FOCUS}
@@ -448,11 +456,11 @@ const handlechatstyles = (usernameventa: string) => {
 ) : (
   <Text>Sin imagen</Text>
 )}
-          <Button color= 'green' onPress={() => //@ts-ignore
-            handlemensajesporventa(selectedVenta.id_venta)}> <Text style = {{color: 'white'}}> CHAT </Text></Button>
+          
 
             </>
           )}
+          {/*BOTON CHAT */}
           </View>
         </View>
       {/*///////////////////////////////////////////// */}
@@ -811,4 +819,10 @@ let location = await Location.getCurrentPositionAsync({});
     });
   })();
 }, []); 
+
+
+   <Button color= 'green' onPress={() => //@ts-ignore
+            handlemensajesporventa(selectedVenta.id_venta)}> <Text style = {{color: 'white'}}> CHAT </Text></Button>
+
+            </>
       */

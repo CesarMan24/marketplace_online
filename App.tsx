@@ -48,7 +48,7 @@ if (!session) {
     ),
   }}
 />
-        <Tab.Screen name = "Mapaa" component={Dashboard2}  options={{
+        <Tab.Screen name = "Mapa" component={Dashboard2}  options={{
             tabBarIcon: ({ color, size }) => (
               <Text style={{ fontSize: size }}>🗺️</Text>
             ),

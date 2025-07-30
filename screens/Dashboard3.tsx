@@ -213,10 +213,20 @@ async function ubicacionesrepetidas() {
       //Alert.alert('Ubicaciones', JSON.stringify(repeat_locations, null, 2))
     }
   }
+  const isanonimo = (usuario : string) => {
+  if (usuario == "Anonimo"){
+  console.log("usuario inexistente")
+ return false
+ }
+ else{ 
+  return true }
+}
+
     return(
         <ScrollView>
+          
           <View style={{ paddingHorizontal: 20, marginTop: 16 }}>
-            {session && username  && ubicacion?
+            {session && isanonimo(username)  && ubicacion ?
             <View>
              <Text style = {{fontFamily : "black", fontSize : 50 }}>Registro de ventas de {username } </Text> 
               <View>
@@ -274,7 +284,7 @@ async function ubicacionesrepetidas() {
               </Text>
              </View>
             
-             :<Text style = {{fontFamily : "black", fontSize : 50 }}> Inicie sesion para registrar productos o verifica que tengas ubicacion asignada</Text> }
+             :<Text style = {{fontFamily : "black", fontSize : 50 , justifyContent: 'center'}}> Verifica el usuario</Text> }
             </View>
             
         </ScrollView>
